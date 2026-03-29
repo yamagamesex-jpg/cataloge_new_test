@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    /* Don't override background if already set */
+  }
+
+  #root {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card backdrop-blur-md border border-border/20 rounded-xl shadow-card;
+  }
+
+  .glass-card-hover {
+    @apply glass-card hover:bg-card-hover hover:shadow-card-hover transition-all duration-300;
+  }
+
+  .glow-button {
+    @apply relative overflow-hidden rounded-lg bg-gradient-to-r from-primary-500 to-secondary-500 p-0.5;
+  }
+
+  .glow-button::before {
+    @apply absolute inset-0 rounded-lg bg-gradient-to-r from-primary-400 to-secondary-400 opacity-0 transition-opacity duration-300;
+    content: '';
+  }
+
+  .glow-button:hover::before {
+    @apply opacity-100;
+  }
+
+  .glow-button > div {
+    @apply relative rounded-md bg-background px-4 py-2 text-foreground transition-colors duration-300;
+  }
+
+  .glow-button:hover > div {
+    @apply bg-transparent text-white;
+  }
+
+  .animated-border {
+    @apply relative overflow-hidden rounded-lg;
+  }
+
+  .animated-border::before {
+    @apply absolute inset-0 rounded-lg bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 p-0.5;
+    content: '';
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-grid {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+}
+
+/* Custom animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection styles */
+::selection {
+  background-color: rgba(59, 130, 246, 0.3);
+  color: white;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}
